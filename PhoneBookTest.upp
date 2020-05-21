@@ -1,8 +1,7 @@
 description " \377";
 
 uses
-
-uses(MYSQL_DB) MySql;
+	CtrlLib;
 
 uses(SQLITE3_DB) plugin/sqlite3;
 
@@ -24,16 +23,13 @@ options(SQLITE3_DB) -DSQLITE_ENABLE_UNLOCK_NOTIFY;
 file
 	PhoneBookTest.h,
 	PhoneBookTest.cpp,
+	PhoneBookTest.lay,
 	main.cpp,
 	DataBase.h,
 	DataBase.icpp,
-	"Config ---------------------------" readonly separator,
-	Config.h,
-	Config.cpp,
 	"Resources ----------------------------------" readonly separator,
-	DataBase.sch,
+	DataBase.sch;
 
 mainconfig
 	"" = "GUI MT SQLITE3_DB";
-
 

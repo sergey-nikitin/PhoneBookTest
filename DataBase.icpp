@@ -20,22 +20,22 @@ void DataBase_Init(bool upgrade ){
 			SQL;
 			
 		
-			if ( CFG().sqlite3_filename == "" ){
-				CFG().sqlite3_filename = GetDataFile( AppendFileName("db", GetExeTitle() + ".db" ));
-				RealizePath(CFG().sqlite3_filename);
+			if ( CFG.sqlite3_filename == "" ){
+				CFG.sqlite3_filename = GetDataFile( AppendFileName("db", GetExeTitle() + ".db" ));
+				RealizePath(CFG.sqlite3_filename);
 			}
 		
-			Cerr() << t_("Real database file name:") << CFG().sqlite3_filename << "\n";
-			RLOG (String().Cat() << t_("Real database file name:") << CFG().sqlite3_filename);
+			Cerr() << t_("Real database file name:") << CFG.sqlite3_filename << "\n";
+			RLOG (String().Cat() << t_("Real database file name:") << CFG.sqlite3_filename);
 			session.SetTrace();
 		
-			if ( !session.Open ( CFG().sqlite3_filename ) ) {
+			if ( !session.Open ( CFG.sqlite3_filename ) ) {
 				LOG (String().Cat() << "Can't create or open database file" ) ;
 				return;
 			}
 		#endif
 		#ifdef flagPGSQL_DB
-			if ( CFG().mysql_server == "" || CFG().mysql_database == "" || CFG().mysql_username == "" ) {
+			if ( CFG.mysql_server == "" || CFG().mysql_database == "" || CFG().mysql_username == "" ) {
 				Cerr() << ( "Can't read PGsql configuration\n" );
 				return;
 			}
