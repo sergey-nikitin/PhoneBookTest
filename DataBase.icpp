@@ -1,0 +1,78 @@
+#include <Sql/Sql.h>
+#include "PhoneBookTest.h"
+using namespace Upp;
+
+#include "DataBase.h"
+
+#ifdef flagSQLITE3_DB
+	Sqlite3Session session;
+#endif
+
+#ifdef flagPGSQL_DB
+	PostgreSQLSession session;
+#endif
+
+
+void DataBase_Init(bool upgrade ){
+	Cerr() << "ConnectionOK=" << ConnectionOK() << "\n";
+	if (!ConnectionOK()) {
+		#ifdef flagSQLITE3_DB
+			SQL;
+			
+		
+			if ( CFG().sqlite3_filename == "" ){
+				CFG().sqlite3_filename = GetDataFile( AppendFileName("db", GetExeTitle() + ".db" ));
+				RealizePath(CFG().sqlite3_filename);
+			}
+		
+			Cerr() << t_("Real database file name:") << CFG().sqlite3_filename << "\n";
+			RLOG (String().Cat() << t_("Real database file name:") << CFG().sqlite3_filename);
+			session.SetTrace();
+		
+			if ( !session.Open ( CFG().sqlite3_filename ) ) {
+				LOG (String().Cat() << "Can't create or open database file" ) ;
+				return;
+			}
+		#endif
+		#ifdef flagPGSQL_DB
+			if ( CFG().mysql_server == "" || CFG().mysql_database == "" || CFG().mysql_username == "" ) {
+				Cerr() << ( "Can't read PGsql configuration\n" );
+				return;
+			}
+			
+			session.SetTrace();
+			
+			session.LogErrors();
+		
+			if ( StrInt ( CFG().mysql_port ) < 1 ) {
+				CFG().mysql_port = "5432";
+			};
+			//RLOG ( "XML host="+ CFG().mysql_server+" port=" + CFG().mysql_port+" dbname="+CFG().mysql_database+" user="+CFG().mysql_username+" password="+CFG().mysql_password);
+			//Cerr()<<  ( "XML host="+ CFG().mysql_server+" port=" + CFG().mysql_port+" dbname="+CFG().mysql_database+" user="+CFG().mysql_username+" password="+CFG().mysql_password +"\n");
+			if ( !session.Open( "host="+ CFG().mysql_server+" port=" + CFG().mysql_port+" dbname="+CFG().mysql_database+" user="+CFG().mysql_username+" password="+CFG().mysql_password)) {
+				Cerr() << ( "Can't connect with PostgreSQL\n" );
+				return;
+			}
+			
+		#endif
+	}
+
+	session.SetTrace();
+	
+	session.LogErrors();
+	SQL = session;
+	
+	SqlId::UseQuotes(false);
+
+	SQL.ClearError();
+	SQL.GetSession().ThrowOnError();
+
+}
+
+bool ConnectionOK(){
+	#ifdef flagPGSQL_DB
+		return session.ConnectionOK();
+	#else
+		return session.IsOpen();
+	#endif
+}

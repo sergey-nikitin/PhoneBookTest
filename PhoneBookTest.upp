@@ -1,0 +1,39 @@
+description " \377";
+
+uses
+
+uses(MYSQL_DB) MySql;
+
+uses(SQLITE3_DB) plugin/sqlite3;
+
+uses(PGSQL_DB) PostgreSQL;
+
+options
+	-trigraphs;
+
+options(SQLITE3_DB) -DSQLITE_ENABLE_IOTRACE;
+
+options(MYSQL_DB) -DMYSQL_DB;
+
+options(SQLITE3_DB) -DSQLITE3_DB;
+
+options(PGSQL_DB) -DPGSQL_DB;
+
+options(SQLITE3_DB) -DSQLITE_ENABLE_UNLOCK_NOTIFY;
+
+file
+	PhoneBookTest.h,
+	PhoneBookTest.cpp,
+	main.cpp,
+	DataBase.h,
+	DataBase.icpp,
+	"Config ---------------------------" readonly separator,
+	Config.h,
+	Config.cpp,
+	"Resources ----------------------------------" readonly separator,
+	DataBase.sch,
+
+mainconfig
+	"" = "GUI MT SQLITE3_DB";
+
+
