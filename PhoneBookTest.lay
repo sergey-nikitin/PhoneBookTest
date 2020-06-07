@@ -1,3 +1,4 @@
-LAYOUT(MainWindowLayout, 400, 200)
+LAYOUT(MainWindowLayout, 749, 408)
+	ITEM(GridCtrl, tablo, ColoringMode(1).Inserting(true).Appending(true).Duplicating(true).Accepting(true).Searching(true).Editing(true).HSizePosZ(12, 20).VSizePosZ(12, 20))
 END_LAYOUT
 

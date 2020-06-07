@@ -3,6 +3,9 @@
 using namespace Upp;
 
 #include "DataBase.h"
+#include "DataBaseSchema.h"
+#include <Sql/sch_schema.h>
+#include <Sql/sch_source.h>
 
 #ifdef flagSQLITE3_DB
 	Sqlite3Session session;
@@ -60,12 +63,57 @@ void DataBase_Init(bool upgrade ){
 	session.SetTrace();
 	
 	session.LogErrors();
+
+	
+	
 	SQL = session;
 	
 	SqlId::UseQuotes(false);
 
 	SQL.ClearError();
 	SQL.GetSession().ThrowOnError();
+
+#ifdef flagSQLITE3_DB
+	SqlSchema sch ( SQLITE3 );
+#endif
+#ifdef flagMYSQL_DB
+	SqlSchema sch ( MY_SQL );
+#endif
+#ifdef flagPGSQL_DB
+	SqlSchema sch ( PGSQL );
+#endif
+	//All_Tables ( sch );
+	All_Tables( sch );
+	
+	session.SetTrace();
+	//session.SetBusyTimeout(300);
+	session.LogErrors();
+	RLOG ( t_ ( " Convert SQL DataBase if needed ..." ) );
+	if ( upgrade ) {
+		RLOG ( t_ ( "Install / Convert SQL DataBase ..." ) );
+	}
+	LOG ( t_ ( " Convert SQL DataBase if needed ... ~~1~~" ) );
+	if ( upgrade && sch.ScriptChanged ( SqlSchema::UPGRADE ) ) {
+		RLOG ( t_ ( "Install / Convert SQL DataBase ( UPGRADE )..." ) );
+		SqlPerformScript ( sch.Upgrade() );
+	}
+	LOG ( t_ ( " Convert SQL DataBase if needed ... ~~2~~" ) );
+	if ( upgrade && sch.ScriptChanged ( SqlSchema::ATTRIBUTES ) ) {
+		RLOG ( t_ ( "Install / Convert SQL DataBase ( ATTRIBUTES )..." ) );
+		SqlPerformScript ( sch.Attributes() );
+	}
+	LOG ( t_ ( " Convert SQL DataBase if needed ... ~~3~~" ) );
+	if ( upgrade && sch.ScriptChanged ( SqlSchema::CONFIG ) ) {
+		RLOG ( t_ ( "Install / Convert SQL DataBase ( CONFIG )..." ) );
+		SqlPerformScript ( sch.ConfigDrop() );
+		SqlPerformScript ( sch.Config() );
+	}
+	LOG ( t_ ( " Convert SQL DataBase if needed ... ~~4~~" ) );
+	SQL.ClearError();
+	sch.SaveNormal();
+	LOG ( t_ ( " Convert SQL DataBase if needed ... ~~5~~" ) );
+	
+	
 
 }
 
