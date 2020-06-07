@@ -1,5 +1,9 @@
 #include "PhoneBookTest.h"
 
+#define IMAGECLASS PhoneIconsImg
+#define IMAGEFILE <PhoneBookTest/PhoneIcons.iml>
+#include <Draw/iml_source.h>
+
 AppConfig CFG;
 
 MainWindowDlg::MainWindowDlg()
@@ -12,7 +16,9 @@ MainWindowDlg::MainWindowDlg()
 	//tablo.WhenChangeRow = THISBACK(UpdateTablo);
 	tablo.WhenInsertRow = THISBACK(InsertTablo);
 	tablo.WhenUpdateRow = THISBACK(UpdateTablo);
-	
+	tablo.WhenRemoveRow = THISBACK(RemoveTablo);
+	update_btn.WhenPush= THISBACK(LoadTablo);
+	update_btn.SetImage(PhoneIconsImg::Update());
 	tablo.RejectNullRow();
 	LoadTablo();
 }
@@ -28,6 +34,7 @@ void MainWindowDlg::TabloSetup(){
 }
 void MainWindowDlg::LoadTablo(){
 	SQL * Select(SqlAll()).From(USERS);
+	tablo.Clear();
 	while (SQL.Fetch()){
 		tablo.Add();
 		
@@ -51,4 +58,9 @@ void MainWindowDlg::InsertTablo(){
 	SQL * SqlInsert(USERS)(USR_PHONE,tablo(USR_PHONE))
 		(USR_NAME,tablo(USR_NAME))
 		(USR_AGE,tablo(USR_AGE));
+}
+void MainWindowDlg::RemoveTablo(){
+	PromptOK("Удаление табло()");
+	SQL * SqlDelete(USERS)
+		.Where(USR_ID == tablo(USR_ID));
 }

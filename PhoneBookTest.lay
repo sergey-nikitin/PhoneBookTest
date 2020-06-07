@@ -1,4 +1,5 @@
-LAYOUT(MainWindowLayout, 749, 408)
-	ITEM(GridCtrl, tablo, ColoringMode(1).Inserting(true).Appending(true).Duplicating(true).Accepting(true).Searching(true).Editing(true).HSizePosZ(12, 20).VSizePosZ(12, 20))
+LAYOUT(MainWindowLayout, 764, 419)
+	ITEM(GridCtrl, tablo, ColoringMode(1).Inserting(true).Appending(true).Duplicating(true).Accepting(true).Searching(true).Editing(true).HSizePosZ(12, 61).VSizePosZ(12, 59))
+	ITEM(Button, update_btn, Tip(t_("ОБНОВЛЯЕТ СТРОКИ ТАБЛИЦЫ")).RightPosZ(44, 110).BottomPosZ(15, 28))
 END_LAYOUT
 

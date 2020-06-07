@@ -11,6 +11,9 @@ using namespace Upp;
 #include <CtrlCore/lay.h>
 #include "DataBaseSchema.h"
 
+#define IMAGECLASS PhoneIconsImg
+#define IMAGEFILE <PhoneBookTest/PhoneIcons.iml>
+#include <Draw/iml_header.h>
 
 class AppConfig {
 	public:
@@ -29,6 +32,7 @@ public:
 	void LoadTablo();
 	void UpdateTablo();
 	void InsertTablo();
+	void RemoveTablo();
 };
 
 

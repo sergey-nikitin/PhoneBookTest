@@ -25,6 +25,7 @@ file
 	PhoneBookTest.h,
 	PhoneBookTest.cpp,
 	PhoneBookTest.lay,
+	PhoneIcons.iml,
 	main.cpp,
 	DataBase.h,
 	DataBaseSchema.h,
