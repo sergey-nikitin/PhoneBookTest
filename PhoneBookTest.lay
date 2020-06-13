@@ -1,5 +1,6 @@
-LAYOUT(MainWindowLayout, 764, 419)
-	ITEM(GridCtrl, tablo, ColoringMode(1).Inserting(true).Appending(true).Duplicating(true).Accepting(true).Searching(true).Editing(true).HSizePosZ(12, 61).VSizePosZ(12, 59))
-	ITEM(Button, update_btn, Tip(t_("ОБНОВЛЯЕТ СТРОКИ ТАБЛИЦЫ")).RightPosZ(44, 110).BottomPosZ(15, 28))
+LAYOUT(MainWindowLayout, 724, 441)
+	ITEM(GridCtrl, tablo, ColoringMode(1).Inserting(true).Appending(true).Duplicating(true).Accepting(true).Searching(true).Editing(true).HSizePosZ(8, 10).VSizePosZ(12, 52))
+	ITEM(Button, update_btn, Tip(t_("ОБНОВЛЯЕТ СТРОКИ ТАБЛИЦЫ")).RightPosZ(10, 80).BottomPosZ(8, 35))
+	ITEM(Button, gamebutton, SetLabel(t_("игра ")).LeftPosZ(8, 80).BottomPosZ(8, 35))
 END_LAYOUT
 

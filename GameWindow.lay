@@ -1,0 +1,4 @@
+LAYOUT(GameWindowLayout, 790, 464)
+	ITEM(ImageCtrlMy, image, HSizePosZ(-3, 0).VSizePosZ(-2, 0))
+END_LAYOUT
+

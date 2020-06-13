@@ -9,6 +9,7 @@
 using namespace Upp;
 #define LAYOUTFILE <PhoneBookTest/PhoneBookTest.lay>
 #include <CtrlCore/lay.h>
+
 #include "DataBaseSchema.h"
 
 #define IMAGECLASS PhoneIconsImg
@@ -33,6 +34,7 @@ public:
 	void UpdateTablo();
 	void InsertTablo();
 	void RemoveTablo();
+	void StartGame();
 };
 
 

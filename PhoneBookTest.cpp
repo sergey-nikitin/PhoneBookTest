@@ -1,5 +1,5 @@
 #include "PhoneBookTest.h"
-
+#include "GameWindow.h"
 #define IMAGECLASS PhoneIconsImg
 #define IMAGEFILE <PhoneBookTest/PhoneIcons.iml>
 #include <Draw/iml_source.h>
@@ -19,6 +19,8 @@ MainWindowDlg::MainWindowDlg()
 	tablo.WhenRemoveRow = THISBACK(RemoveTablo);
 	update_btn.WhenPush= THISBACK(LoadTablo);
 	update_btn.SetImage(PhoneIconsImg::Update());
+	gamebutton.WhenPush= THISBACK(StartGame);
+	gamebutton.SetImage(PhoneIconsImg::GameIcon());
 	tablo.RejectNullRow();
 	LoadTablo();
 }
@@ -63,4 +65,8 @@ void MainWindowDlg::RemoveTablo(){
 	PromptOK("Удаление табло()");
 	SQL * SqlDelete(USERS)
 		.Where(USR_ID == tablo(USR_ID));
+}
+void MainWindowDlg::StartGame(){
+	GameWindow gw;
+	gw.Run();
 }
