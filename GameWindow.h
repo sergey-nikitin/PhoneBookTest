@@ -7,6 +7,9 @@ class ImageCtrlMy : public ImageCtrl {
 
 public:
 	virtual void   Paint(Draw& w);
+	int v=0;
+	void TurnRight();
+	void TurnLeft();
 };
 
 
@@ -19,6 +22,9 @@ class GameWindow : public WithGameWindowLayout<TopWindow> {
 public:
 	GameWindow();
 	void UpdateWindow();
+	void TurnRight();
+	void TurnLeft();
+	bool Key(dword key, int count);
 };
 
 

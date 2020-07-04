@@ -35,6 +35,7 @@ public:
 	void InsertTablo();
 	void RemoveTablo();
 	void StartGame();
+	
 };
 
 

@@ -70,3 +70,4 @@ void MainWindowDlg::StartGame(){
 	GameWindow gw;
 	gw.Run();
 }
+

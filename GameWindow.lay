@@ -1,4 +1,6 @@
-LAYOUT(GameWindowLayout, 790, 464)
-	ITEM(ImageCtrlMy, image, HSizePosZ(-3, 0).VSizePosZ(-2, 0))
+LAYOUT(GameWindowLayout, 790, 499)
+	ITEM(ImageCtrlMy, image, SetFrame(BlackFrame()).HSizePosZ(19, 6).VSizePosZ(12, 73))
+	ITEM(Button, btnleft, SetLabel(t_("<-Влево")).LeftPosZ(28, 56).BottomPosZ(10, 45))
+	ITEM(Button, btnright, SetLabel(t_("Вправо->")).RightPosZ(26, 56).BottomPosZ(10, 45))
 END_LAYOUT
 
